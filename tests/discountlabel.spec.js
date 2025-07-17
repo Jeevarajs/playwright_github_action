@@ -1,7 +1,7 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
 
-test.only('Discountlabel SiteMonitoring orderFlow', async ({ page }) => {
+test('Discountlabel SiteMonitoring orderFlow', async ({ page }) => {
   await page.goto('https://www.discountlabels.com/User/Login/');
   await page.locator("#username").fill("test182@mailinatro.com");
   await page.locator("#password").fill("Test@123");
