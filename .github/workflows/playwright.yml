@@ -1,12 +1,13 @@
 name: Playwright Tests
 
 on:
+  workflow_dispatch:  # ✅ Allows manual run
   push:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
   schedule:
-    - cron: '20 7 * * *'  # Runs every day at 07:20 UTC (12:50 PM IST)
+    - cron: '40 7 * * *'  # ✅ Runs every day at 07:40 UTC (1:10 PM IST)
 
 jobs:
   test:
