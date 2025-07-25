@@ -2,7 +2,7 @@
 import { test, expect } from '@playwright/test';
 import path from 'path';
 
-test.only('Discountlabel SiteMonitoring orderFlow', async ({ page }) => { 
+test('Discountlabel SiteMonitoring orderFlow', async ({ page }) => { 
   await page.goto('https://www.discountlabels.com/User/Login/');
   await page.locator("#username").fill("test182@mailinatro.com",{timeout: 10000});
   await page.locator("#password").fill("Test@123",{timeout: 10000});
