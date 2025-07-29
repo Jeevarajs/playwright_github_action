@@ -2,7 +2,7 @@
 import { test, expect } from '@playwright/test';
 import path from 'path';
 
-test('RippedSheet SiteMonitoring orderFlow', async ({ page }) => { 
+test.only('RippedSheet SiteMonitoring orderFlow', async ({ page }) => { 
   await page.goto('https://rippedsheets.com/my-account');
   await page.locator("#username").fill("test01@mailinator.com",{timeout: 10000});
   await page.locator("#password").fill("Test@123",{timeout: 10000});
@@ -17,7 +17,7 @@ test('RippedSheet SiteMonitoring orderFlow', async ({ page }) => {
   const orderBtn= await page.waitForSelector(".woocommerce-variation-add-to-cart-enabled button")
   await orderBtn.click({timeout: 10000,noWaitAfter: true });
   await page.waitForLoadState('networkidle');
-  await expect(page).toHaveURL(/.*cart/);
+  await expect(page).toHaveURL(/cart/);
   await page.locator(".wc-proceed-to-checkout a").click({timeout: 10000});
     await page.waitForLoadState();
   await expect(page).toHaveURL(/.*checkout/);
