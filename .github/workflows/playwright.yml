@@ -1,13 +1,13 @@
 name: Playwright Tests
 
 on:
-  workflow_dispatch:  # ✅ Allows manual run
+  workflow_dispatch:  # manual run
   push:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
   schedule:
-    - cron: '40 7 * * *'  # ✅ Runs daily at 07:40 UTC (1:10 PM IST)
+    - cron: '40 7 * * *'  # daily at 7:40 UTC / 1:10 PM IST
 
 jobs:
   test:
@@ -29,15 +29,21 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Run Playwright tests
+      - name: Run Playwright Tests
         run: npx playwright test
 
-      - name: Upload failed test artifacts
-        if: failure()
+      - name: Compress Playwright Report
+        if: always()
+        run: |
+          zip -r playwright-report.zip playwright-report || echo "No report to zip"
+
+      - name: Upload Playwright Artifacts (HTML report, trace, screenshots)
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-failure-artifacts
+          name: playwright-artifacts
           path: |
+            playwright-report.zip
             playwright-report/
             test-results/
             screenshots/
