@@ -17,7 +17,8 @@ test('RippedSheet SiteMonitoring orderFlow', async ({ page }) => {
   const orderBtn= await page.waitForSelector(".woocommerce-variation-add-to-cart-enabled button")
   await orderBtn.click({timeout: 10000,noWaitAfter: true });
   await page.waitForLoadState('networkidle');
-  await expect(page).toHaveURL(/cart/);
+  await page.waitForURL("https://rippedsheets.com/cart")
+  await expect(page).toHaveURL("https://rippedsheets.com/cart");
   await page.locator(".wc-proceed-to-checkout a").click({timeout: 10000});
     await page.waitForLoadState();
   await expect(page).toHaveURL(/.*checkout/);
